@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -33,8 +34,14 @@ public class SAXParserFXMLController implements Initializable {
         //File selectedFile = new File("C:\\Users\\Conno\\Classes\\CS4330\\ChallengeSAXParser\\SAXParserDemo\\src\\saxparserdemo\\test2.xml");
         
         parser = new XMLParser(selectedFile, 4);
-        parser.parse();
-        textArea.setText(parser.getOutput());
+        
+        try{
+            parser.parse();
+            textArea.setText(parser.getOutput());
+        }
+        catch (SAXException e){
+            textArea.setText("Parsing error occurred in selected XML.\nPlease make sure XML is properly formed.");
+        }
     }
     
     @Override

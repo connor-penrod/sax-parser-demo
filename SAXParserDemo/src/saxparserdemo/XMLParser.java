@@ -1,11 +1,11 @@
 package saxparserdemo;
 
 import java.io.File;
-import java.util.Hashtable;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
@@ -84,7 +84,7 @@ public class XMLParser {
         };
     }
     
-    public void parse()
+    public void parse() throws SAXException
     {
         try
         {
@@ -96,6 +96,10 @@ public class XMLParser {
         catch(Exception e)
         {
             System.out.println("Error: " + e.toString());
+            if(e instanceof SAXException)
+            {
+                throw new SAXException();
+            }
         }
     }
     
