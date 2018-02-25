@@ -35,7 +35,7 @@ public class XMLParser {
         return new DefaultHandler(){
             @Override
             public void startDocument() throws SAXException {
-                System.out.println("Started.");
+                System.out.println("Started parsing.");
             }
             
             public void startElement(String namespaceURI,
@@ -43,7 +43,7 @@ public class XMLParser {
                          String qName, 
                          Attributes atts) throws SAXException {
                 indent += 2;
-                hierarchyStr += "- [" + qName + "]" + "\n" + new String(new char[indent]).replace("\0", " "); //this is some black magic shit i found on stack overflow
+                hierarchyStr += "- [" + qName + "]" + "\n" + new String(new char[indent]).replace("\0", " "); //this is some black magic shit i found on stackoverflow
                 contentBuffer = new StringBuffer();
             }
             
@@ -58,11 +58,14 @@ public class XMLParser {
             {
                 indent -= 2;
                 hierarchyStr = hierarchyStr.substring(0, hierarchyStr.length() - (indent+3));
-                if(!doubleChecker.equals(contentBuffer.toString()))
+                if(!doubleChecker.equals(contentBuffer.toString().replaceAll("\\s+","")))
                 {
-                    System.out.println(doubleChecker + "|" + contentBuffer);
                     hierarchyStr += " --> " + "\"" + contentBuffer + "\"" + "\n" + new String(new char[indent]).replace("\0", " ");
-                    doubleChecker = contentBuffer.toString();
+                    doubleChecker = contentBuffer.toString().replaceAll("\\s+","");
+                }
+                else
+                {
+                    hierarchyStr += "\n" + new String(new char[indent]).replace("\0", " ");
                 }
             }
         };
