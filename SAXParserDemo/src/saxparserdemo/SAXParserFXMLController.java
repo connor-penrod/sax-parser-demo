@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
  *
@@ -27,10 +28,11 @@ public class SAXParserFXMLController implements Initializable {
         
         FileChooser fc = new FileChooser();
         fc.setTitle("Select File");
+        fc.getExtensionFilters().add(new ExtensionFilter("XML Documents", "*.xml", "*.XML"));
         File selectedFile = fc.showOpenDialog(btn.getScene().getWindow());
         //File selectedFile = new File("C:\\Users\\Conno\\Classes\\CS4330\\ChallengeSAXParser\\SAXParserDemo\\src\\saxparserdemo\\test2.xml");
         
-        parser = new XMLParser(selectedFile);
+        parser = new XMLParser(selectedFile, 4);
         parser.parse();
         textArea.setText(parser.getOutput());
     }

@@ -18,16 +18,23 @@ public class XMLParser {
     private DefaultHandler handler;
     
     private int indent = 0;
+    private int indentSize;
     private String hierarchyStr;
     private StringBuffer contentBuffer;
     private String doubleChecker;
         
-    public XMLParser(File file)
+    public XMLParser(File file, int indentSize)
     {
         this.file = file;
         handler = setupHandler();
         hierarchyStr = "";
         doubleChecker = "";
+        this.indentSize = indentSize;
+    }
+    
+    public XMLParser(File file)
+    {
+        this(file, 4);
     }
     
     private DefaultHandler setupHandler()
@@ -42,7 +49,7 @@ public class XMLParser {
                          String localName,
                          String qName, 
                          Attributes atts) throws SAXException {
-                indent += 2;
+                indent += indentSize;
                 hierarchyStr += "- [" + qName + "]" + "\n" + new String(new char[indent]).replace("\0", " "); //this is some black magic shit i found on stackoverflow
                 contentBuffer = new StringBuffer();
             }
@@ -56,8 +63,8 @@ public class XMLParser {
                          String localName,
                          String qName)
             {
-                indent -= 2;
-                hierarchyStr = hierarchyStr.substring(0, hierarchyStr.length() - (indent+3));
+                indent -= indentSize;
+                hierarchyStr = hierarchyStr.substring(0, hierarchyStr.length() - (indent+indentSize+1));
                 if(!doubleChecker.equals(contentBuffer.toString().replaceAll("\\s+","")))
                 {
                     hierarchyStr += " --> " + "\"" + contentBuffer + "\"" + "\n" + new String(new char[indent]).replace("\0", " ");
