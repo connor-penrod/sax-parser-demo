@@ -68,6 +68,12 @@ public class XMLParser {
                     hierarchyStr += "\n" + new String(new char[indent]).replace("\0", " ");
                 }
             }
+            
+            @Override
+            public void endDocument()
+            {
+                System.out.println("Parsing finished.");
+            }
         };
     }
     

@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 
@@ -13,7 +14,7 @@ import javafx.stage.FileChooser;
  *
  * @author Connor Penrod
  */
-public class FXMLDocumentController implements Initializable {
+public class SAXParserFXMLController implements Initializable {
     
     private XMLParser parser;
     
@@ -22,10 +23,13 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
+        Button btn = (Button)event.getSource();
+        
         FileChooser fc = new FileChooser();
         fc.setTitle("Select File");
+        File selectedFile = fc.showOpenDialog(btn.getScene().getWindow());
+        //File selectedFile = new File("C:\\Users\\Conno\\Classes\\CS4330\\ChallengeSAXParser\\SAXParserDemo\\src\\saxparserdemo\\test2.xml");
         
-        File selectedFile = new File("C:\\Users\\Conno\\Classes\\CS4330\\ChallengeSAXParser\\SAXParserDemo\\src\\saxparserdemo\\test.xml");
         parser = new XMLParser(selectedFile);
         parser.parse();
         textArea.setText(parser.getOutput());
