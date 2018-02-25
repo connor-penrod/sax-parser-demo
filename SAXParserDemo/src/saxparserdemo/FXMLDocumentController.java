@@ -28,6 +28,7 @@ public class FXMLDocumentController implements Initializable {
         File selectedFile = new File("C:\\Users\\Conno\\Classes\\CS4330\\ChallengeSAXParser\\SAXParserDemo\\src\\saxparserdemo\\test.xml");
         parser = new XMLParser(selectedFile);
         parser.parse();
+        System.out.println(parser.getOutput());
     }
     
     @Override
