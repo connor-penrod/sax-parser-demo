@@ -11,7 +11,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="320.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="button" onAction="#handleButtonAction" prefHeight="5.0" prefWidth="147.0" text="Load File" VBox.vgrow="ALWAYS">
+            <Button fx:id="button" onAction="#handleButtonAction" prefHeight="5.0" prefWidth="147.0" text="Load XML File" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin></Button>

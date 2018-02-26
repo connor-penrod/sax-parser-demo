@@ -25,6 +25,8 @@ public class SAXParserFXMLController implements Initializable {
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
+        //handle loading of XML file, instantiate parser and attempt to parse
+        
         Button btn = (Button)event.getSource();
         
         FileChooser fc = new FileChooser();
@@ -39,6 +41,7 @@ public class SAXParserFXMLController implements Initializable {
             parser.parse();
             textArea.setText(parser.getOutput());
         }
+        //if parsing error occurred
         catch (SAXException e){
             textArea.setText("Parsing error occurred in selected XML.\nPlease make sure XML is properly formed.");
         }
